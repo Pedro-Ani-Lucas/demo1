@@ -31,4 +31,15 @@ public class ProdutoService {
         return repository.findAll();
     }
 
+    public ProdutoEntity atualizar(Long id, ProdutoEntity dados){
+
+        ProdutoEntity produto = repository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        // Atualiza os campos
+        produto.setNome(dados.getNome());
+        produto.setPreco(dados.getPreco());
+
+        return repository.save(produto);
+    }
+
 }

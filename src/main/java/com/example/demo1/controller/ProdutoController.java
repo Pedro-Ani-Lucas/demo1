@@ -2,6 +2,7 @@ package com.example.demo1.controller;
 
 import com.example.demo1.model.ProdutoEntity;
 import com.example.demo1.service.ProdutoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,16 @@ public class ProdutoController {
     @GetMapping
     public List<ProdutoEntity> listar() {
         return service.listar();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?>atualizar(@PathVariable Long id, @RequestBody ProdutoEntity produto){
+        try {
+            ProdutoEntity atualizado = service.atualizar(id, produto);
+            return ResponseEntity.ok(atualizado);
+        } catch (Exception e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
     }
     
 }
