@@ -36,5 +36,15 @@ public class ProdutoController {
             return ResponseEntity.status(404).body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletar(@PathVariable long id) {
+        try {
+            service.deletar(id);
+            return ResponseEntity.ok("Produto removido com sucesso");
+        } catch (Exception e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
     
 }
