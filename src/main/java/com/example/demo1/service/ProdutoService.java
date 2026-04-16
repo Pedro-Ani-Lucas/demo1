@@ -42,4 +42,12 @@ public class ProdutoService {
         return repository.save(produto);
     }
 
+    public void deletar(Long id) {
+        ProdutoEntity produto = repository.findById(id).orElse(null);
+        if(produto == null) {
+            throw new RuntimeException("Produto não encontrado");
+        }
+        repository.delete(produto);
+    }
+
 }
